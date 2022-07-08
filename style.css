@@ -1,0 +1,476 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Arima:wght@100;200;300;400;500;600;700&family=Poppins:wght@100;200;300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Arima:wght@100;200;300;400;500;600;700&family=Indie+Flower&family=Poppins:wght@100;200;300;400;500;600;700&display=swap");
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgb(74, 177, 255), rgb(45, 92, 254));
+    font-family: Poppins, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+    overflow: hidden;
+}
+
+.heading {
+    text-align: center;
+    letter-spacing: 4px;
+    font-family: Arima, cursive;
+}
+
+.wrapper {
+    margin: 0px auto;
+    max-width: 420px;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 30px;
+    overflow: hidden;
+    padding-bottom: 28px;
+}
+
+.controls{
+    padding-top: 28px;
+}
+
+.add {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.add__task {
+    height: 52px;
+    width: 100%;
+    position: relative;
+}
+
+.add__task input {
+    width: 100%;
+    height: 100%;
+    padding: 0px 20px;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid rgb(153, 153, 153);
+    font-size: 18px;
+}
+
+.add__task label {
+    color: rgb(191, 191, 191);
+    font-size: 18px;
+    letter-spacing: 1px;
+    font-weight: 500;
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    padding: 0px 4px;
+    white-space: nowrap;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 24px;
+    cursor: text;
+    transition: all 0.1s ease 0s;
+}
+
+.add__task input:focus {
+    border: 2px solid rgb(60, 135, 255);
+}
+
+#deadline {
+    border: none;
+    outline: none;
+    font-size: 18px;
+    font-weight: bold;
+    position: relative;
+    cursor: pointer;
+    z-index: 100;
+    opacity: 0;
+    width: 34px;
+}
+
+.nowDate:hover + .deadline i {
+    animation: 1.8s ease 0s infinite normal none running shake;
+}
+
+@keyframes shake {
+
+    10%,
+    90% {
+        transform: translate3d(-1px, -50%, 0px);
+    }
+
+    20%,
+    80% {
+        transform: translate3d(2px, -50%, 0px);
+    }
+
+    30%,
+    50%,
+    70% {
+        transform: translate3d(-2px, -50%, 0px);
+    }
+
+    40%,
+    60% {
+        transform: translate3d(2px, -50%, 0px);
+    }
+}
+
+#deadline::-webkit-calendar-picker-indicator {
+    font-size: 30px;
+    opacity: 1;
+    cursor: pointer;
+}
+
+.add__deadline {
+    margin-top: 12px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.add__deadline span {
+    font-size: 14px;
+    margin-right: 10px;
+    white-space: nowrap;
+}
+
+.btn {
+    margin-top: 16px;
+    text-transform: capitalize;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 12.5px 14px;
+    border: none;
+    border-radius: 4px;
+    background: linear-gradient(135deg, rgb(23, 152, 251) 0%, rgb(45, 92, 254) 100%);
+    color: rgb(255, 255, 255);
+    font-family: Poppins, sans-serif;
+    font-weight: bold;
+    transition: all 0.2s ease 0s;
+}
+
+#btn-save {
+    display: none;
+}
+
+.add__deadline i {
+    position: absolute;
+    font-size: 38px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    cursor: pointer;
+    left: 0;
+}
+
+.add__deadline i:hover {
+    opacity: 0.8;
+}
+
+#add__save:hover {
+    opacity: 0.9;
+}
+
+.menu {
+    background-color: rgb(255, 255, 255);
+}
+
+.tabList {
+    list-style: none;
+    display: flex;
+    border-bottom: 1px solid rgb(191, 191, 191);
+    position: relative;
+    padding: 0px 25px;
+}
+
+.tabList .line {
+    position: absolute;
+    transition: all 0.25s ease 0s;
+    bottom: -1px;
+    left: 25px;
+    height: 2px;
+    width: 0px;
+    background-color: rgb(98, 0, 238);
+    border-radius: 10px;
+}
+
+.tabName {
+    width: calc(33.3333%);
+    text-align: center;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.25s ease 0s;
+    color: rgb(191, 191, 191);
+}
+
+.tabName.active {
+    color: rgb(98, 0, 238);
+    transform: translateY(-5px);
+}
+
+.tabContent ul {
+    list-style: none;
+    display: none;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(191, 191, 191);
+    padding: 16px 25px;
+}
+
+.tabContent ul li {
+    padding: 0px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    margin-right: 0px;
+    border: 1px solid transparent;
+    transition: all 0.25s ease 0s;
+    font-size: 14px;
+}
+
+.tabContent ul li.active {
+    color: rgb(255, 255, 255);
+    background: linear-gradient(135deg, rgb(23, 152, 251) 0%, rgb(45, 92, 254) 100%);
+    letter-spacing: 1.2px;
+}
+
+.tabContent ul.active {
+    display: flex;
+}
+
+.tabContent .tabPaneSearch {
+    padding: 10.4px 25px;
+    position: relative;
+}
+
+#search {
+    width: 100%;
+    height: 34px;
+    outline: none;
+    font-size: 16px;
+    border-radius: 5px;
+    padding: 0px 20px 0px 48px;
+    border: 1px solid rgb(153, 153, 153);
+    font-weight: 300;
+}
+
+#search::placeholder {
+    color: rgb(191, 191, 191);
+    font-weight: 300;
+    font-family: Poppins, sans-serif;
+}
+
+.tabPaneSearch i {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 39px;
+    font-size: 24px;
+}
+
+#search:focus+i {
+    color: rgb(98, 0, 238);
+}
+
+.list {
+    list-style: none;
+    padding: 28px 25px;
+    overflow-y: auto;
+    padding-bottom: 0;
+}
+
+.task {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    padding: 6px 0px 8px;
+    position: relative;
+    transition: all 0.25s ease 0s;
+    user-select: none;
+    border-bottom: 1px solid rgb(204, 204, 204);
+    margin-bottom: 20px;
+}
+
+.task.expired {
+    pointer-events: none;
+}
+
+.task.completed .iconCheck {
+    color: rgb(0, 213, 0);
+}
+
+.task.completed .task-content .name {
+    color: rgb(0, 213, 0);
+    text-decoration: line-through;
+}
+
+.task.edit {
+    user-select: none;
+    pointer-events: none;
+}
+
+.task.edit .task-content {
+    opacity: 0.28;
+}
+
+.task.expired .iconCheck {
+    color: rgb(255, 0, 0);
+}
+
+.task.expired .task-content .name {
+    color: rgb(255, 0, 0);
+    text-decoration: line-through;
+}
+
+.task input {
+    display: none;
+    position: relative;
+    z-index: 100;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+}
+
+.task .iconCheck {
+    left: 0px;
+    font-size: 28px;
+    color: rgb(191, 191, 191);
+    cursor: pointer;
+}
+
+.task:hover {
+    background-color: rgb(248, 248, 248);
+}
+
+.task-content {
+    display: block;
+    width: 100%;
+    margin: 0px 20px 0px 14px;
+}
+
+.task__dateTime {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+}
+
+.task .task__dateTime span {
+    display: block;
+    font-weight: 300;
+    font-style: italic;
+    letter-spacing: 1px;
+}
+
+.task-content .name {
+    font-family: Arima, cursive;
+    font-weight: bold;
+    letter-spacing: 1.4px;
+    font-size: 18px;
+    line-height: 1.4;
+    cursor: pointer;
+}
+
+.task .dot {
+    margin-left: auto;
+    font-size: 24px;
+    cursor: pointer;
+    position: relative;
+}
+
+.task.expired .dot {
+    pointer-events: all;
+}
+
+.task .dot .setting {
+    position: absolute;
+    list-style: none;
+    background-color: rgb(255, 255, 255);
+    padding: 4px 0px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 6px;
+    transition: all 0.25s ease 0s;
+    z-index: 100;
+    right: -8px;
+    top: 0px;
+    transform-origin: 80% 20%;
+    transform: scale(0);
+    opacity: 0;
+}
+
+.task .dot .setting li {
+    white-space: nowrap;
+    font-size: 20px;
+    font-weight: normal;
+    padding: 8px 20px;
+}
+
+.task.expired .dot .setting .edit {
+    display: none;
+}
+
+.task .dot .setting li i {
+    margin-right: 8px;
+}
+
+.task .dot .setting li:hover {
+    background: rgb(245, 245, 245);
+}
+
+.task .dot.active .setting {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.nowDate {
+    font-size: 15px;
+    font-weight: 600;
+    padding: 5px 15px;
+    z-index: 200;
+    cursor: default;
+}
+
+.tabContent .tabPaneSort li {
+    border: 1px solid rgb(0, 0, 0);
+    transition: all 0.25s ease 0s;
+}
+
+.tabContent .tabPaneSort li:hover {
+    color: rgb(255, 255, 255);
+    background: rgb(23, 152, 251);
+    border: 1px solid rgb(23, 152, 251);
+}
+
+ul.tabPaneSort {
+    justify-content: space-evenly;
+}
+
+.deadline {
+    position: relative;
+}
+
+/* width */
+.list::-webkit-scrollbar {
+    width: 2px;
+    
+}
+
+/* Track */
+.list::-webkit-scrollbar-track {
+    background: transparent;
+    
+}
+
+/* Handle */
+.list::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+.list::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

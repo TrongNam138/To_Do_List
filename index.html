@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To do list</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css" integrity="sha512-vebUliqxrVkBy3gucMhClmyQP9On/HAWQdKDXRaAlb/FKuTbxkjPKUyqVOxAcGwFDka79eTF+YXwfke1h3/wfg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic.min.css" integrity="sha512-LeCmts7kEi09nKc+DwGJqDV+dNQi/W8/qb0oUSsBLzTYiBwxj0KBlAow2//jV7jwEHwSCPShRN2+IWwWcn1x7Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="wrapper">
+
+        <div class="controls">
+            
+            <h1 class="heading">To Do List</h1>
+
+        <div class="add">
+            <div class="add__task">
+                <input type="text" id="input-task" >
+                <label for="input-task">Task name</label>
+            </div>
+            <div class="add__deadline">
+                <span>Due date:</span>
+                <p class="nowDate">--- dd/mm/yyyy --:--</p>
+                <div class="deadline">
+                    <input id="deadline" type="datetime-local">
+                    <i class="las la-calendar-check"></i>
+                </div>
+            </div>
+            <button class="btn" id="btn-add">Add task</button>
+            <button class="btn" id="btn-save">Save task</button>
+        </div>
+
+        <div class="menu">
+
+            <ul class="tabList">
+                <li class="tabName active" id="tabShow">Show</li>
+                <li class="tabName" id="tabSort">Sort</li>
+                <li class="tabName" id="tabSearch">Search</li>
+                <div class="line"></div>
+            </ul>
+
+            <div class="tabContent">
+
+                <ul class="active tabPaneShow" data-pane="tabShow">
+                    <li id="all" class="active">All</li>
+                    <li id="pending">Pending</li>
+                    <li id="completed">Completed</li>
+                    <li id="expired">Expired</li>
+                </ul>
+
+                <ul class="tabPaneSort" data-pane="tabSort">
+                    <li id="time">Time</li>
+                    <li id="a-z">A -> Z</li>
+                    <li id="z-a">Z -> A</li>
+                </ul>
+                
+                <ul class="tabPaneSearch" data-pane="tabSearch">
+                    <input type="text" id="search" placeholder="What task are you looking for?" autocomplete="off">
+                    <i class="las la-search"></i>
+                </ul>
+
+            </div>
+
+        </div>
+        </div>
+
+        <ul class="list">
+            
+        </ul>
+            
+            
+
+            
+
+    </div>
+
+    <script src="./app.js"></script>
+</body>
+</html>
