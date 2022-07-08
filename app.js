@@ -170,6 +170,7 @@ document.querySelectorAll('.btn').forEach(btn => {
 inputDueDate.oninput = function(){
     if(new Date().getTime() > new Date(this.value).getTime()){
         pNowDate.innerHTML = '--- dd/mm/yyyy --:--'
+        this.value = ''
     }else{
         pNowDate.innerHTML = convertDate(new Date(this.value))
     }
