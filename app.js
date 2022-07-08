@@ -11,6 +11,24 @@ const pNowDate =  document.querySelector('.nowDate')
 
 list.style.height = document.documentElement.clientHeight - document.querySelector('.controls').offsetHeight - 28 + 'px'
 
+function showItem(){
+    const arrShow = []
+
+    list.querySelectorAll('.task').forEach(element => {
+        if(!element.classList.contains('show')){
+            arrShow.push(element)
+        }
+    })
+
+    let count = 0
+    const loopInterval = setInterval(() => {
+        if(count === arrShow.length) {
+            clearInterval(loopInterval)
+        } else {
+            arrShow[count++].classList.add('show')
+        }
+    }, 250);
+}
 
 // Hàm thêm số 0 vào đằng trước các só từ 1 -> 9
 function addZero(number){
@@ -65,13 +83,16 @@ function renderTemplate(insertPosition){
     });
 
     let count = 0
+    setTimeout(()=>{
+        document.querySelectorAll('.task')[count++].classList.add('show')
+    }, 0)
     const loopInterval = setInterval(() => {
         if(count === document.querySelectorAll('.task').length) {
             clearInterval(loopInterval)
         } else {
             document.querySelectorAll('.task')[count++].classList.add('show')
         }
-    }, 125);
+    }, 250);
 
 }
 
@@ -112,25 +133,11 @@ tabName.forEach(item => {
                 ul.classList.add('active')
             }
         })
+        
+        document.getElementById("search").value = ''
 
         if(item.id !== 'tabShow'){
-            const arrShow = []
-
-            list.querySelectorAll('.task').forEach(element => {
-                if(!element.classList.contains('show')){
-                    arrShow.push(element)
-                }
-            })
-
-            let count = 0
-            const loopInterval = setInterval(() => {
-                if(count === arrShow.length) {
-                    clearInterval(loopInterval)
-                } else {
-                    arrShow[count++].classList.add('show')
-                }
-            }, 125);
-
+            showItem()
         }else{
             document.querySelector('.tabPaneShow li.active')?.click()
         }
@@ -267,7 +274,7 @@ function deleteClick(_this){
         }else{
             document.querySelector('.notThing')?.remove()
         }
-    }, 125)
+    }, 250)
 }
 //-----------------------------------------------------
 
@@ -388,25 +395,30 @@ function show (show){
     let countDisplay = 0
     let countNotDisplayed = 0
 
-    
+    setTimeout(()=>{
+        notDisplayed[countNotDisplayed++].classList.remove('show')
+    }, 0)
     const notDisplayedInterval = setInterval(() => {
         if(countNotDisplayed === notDisplayed.length) {
             clearInterval(notDisplayedInterval)
         } else {
             notDisplayed[countNotDisplayed++].classList.remove('show')
         }
-    }, 125);
+    }, 250);
     
     setTimeout(() => {
+        setTimeout(()=>{
+            display[countDisplay++].classList.add('show')
+        }, 0)
         const displayInterval = setInterval(() => {
             if(countDisplay === display.length) {
                 clearInterval(displayInterval)
             } else {
                 display[countDisplay++].classList.add('show')
             }
-        }, 125);
+        }, 250);
     
-    }, notDisplayed.length * 125);
+    }, notDisplayed.length * 250);
 
     return
 }
@@ -478,23 +490,30 @@ document.getElementById("search").oninput = function(){
     let countDisplay = 0
     let countNotDisplayed = 0
 
+    setTimeout(()=>{
+        notDisplayed[countNotDisplayed++].classList.remove('show')
+    }, 0)
     const notDisplayedInterval = setInterval(() => {
         if(countNotDisplayed === notDisplayed.length) {
             clearInterval(notDisplayedInterval)
         } else {
             notDisplayed[countNotDisplayed++].classList.remove('show')
         }
-    }, 125);
+    }, 250);
     
     setTimeout(() => {
+        setTimeout(()=>{
+            display[countDisplay++].classList.add('show')
+        }, 0)
         const displayInterval = setInterval(() => {
             if(countDisplay === display.length) {
                 clearInterval(displayInterval)
             } else {
                 display[countDisplay++].classList.add('show')
             }
-        }, 125);    
-    }, notDisplayed.length * 125);
+        }, 250);
+    
+    }, notDisplayed.length * 250);
 
 }
 
