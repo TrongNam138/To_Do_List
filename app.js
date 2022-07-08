@@ -9,6 +9,9 @@ const list = document.querySelector('.list')
 const pNowDate =  document.querySelector('.nowDate')
 
 
+list.style.height = document.documentElement.clientHeight - document.querySelector('.controls').offsetHeight - 28 + 'px'
+
+
 // Hàm thêm số 0 vào đằng trước các só từ 1 -> 9
 function addZero(number){
     if(number > 0 && number < 10 ){
@@ -60,6 +63,16 @@ function renderTemplate(insertPosition){
     data.forEach(element => {
         list.insertAdjacentHTML(insertPosition, template(element.id , element.status, element.dateTime, element.name))
     });
+
+    let count = 0
+    const loopInterval = setInterval(() => {
+        if(count === document.querySelectorAll('.task').length) {
+            clearInterval(loopInterval)
+        } else {
+            document.querySelectorAll('.task')[count++].classList.add('show')
+        }
+    }, 125);
+
 }
 
 if(data.length === 0){
@@ -99,17 +112,27 @@ tabName.forEach(item => {
                 ul.classList.add('active')
             }
         })
-        document.querySelector('.tabPaneShow li.active')?.click()
+
         if(item.id !== 'tabShow'){
-            list.querySelectorAll('.task').forEach(li => {
-                li.style.display = 'flex'
-                if(data.length === 0){
-                    if(document.querySelector('.notThing') === null)
-                        list.insertAdjacentHTML('afterbegin', `<p class="notThing">You don't have any task here</p>`)
-                }else{
-                    document.querySelector('.notThing')?.remove()
+            const arrShow = []
+
+            list.querySelectorAll('.task').forEach(element => {
+                if(!element.classList.contains('show')){
+                    arrShow.push(element)
                 }
             })
+
+            let count = 0
+            const loopInterval = setInterval(() => {
+                if(count === arrShow.length) {
+                    clearInterval(loopInterval)
+                } else {
+                    arrShow[count++].classList.add('show')
+                }
+            }, 125);
+
+        }else{
+            document.querySelector('.tabPaneShow li.active')?.click()
         }
     }
 })
@@ -199,7 +222,11 @@ buttonAdd.onclick = function(){
     }
     
     list.insertAdjacentHTML('afterbegin', template(+idMax + 1 ,"pending", dateTime, name))
-    
+    setTimeout(()=>{
+        document.querySelectorAll('.task').forEach(element => {
+            element.classList.add('show')
+        })
+    },0)
     
     inputTask.value = ''
     inputDueDate.value = ''
@@ -231,13 +258,16 @@ function deleteClick(_this){
     
     localStorage.setItem('data' ,JSON.stringify(data))
     
-    task.remove()
-    if(data.length === 0){
-        if(document.querySelector('.notThing') === null)
-            list.insertAdjacentHTML('afterbegin', `<p class="notThing">You don't have any task here</p>`)
-    }else{
-        document.querySelector('.notThing')?.remove()
-    }
+    task.classList.remove('show')
+    setTimeout(()=>{
+        task.remove()
+        if(data.length === 0){
+            if(document.querySelector('.notThing') === null)
+                list.insertAdjacentHTML('afterbegin', `<p class="notThing">You don't have any task here</p>`)
+        }else{
+            document.querySelector('.notThing')?.remove()
+        }
+    }, 125)
 }
 //-----------------------------------------------------
 
@@ -301,8 +331,12 @@ function nameClick(_this){
         task = task.parentElement
     }
     
-    task.classList.toggle('pending')
-    task.classList.toggle('completed')
+    if(task.classList.contains('pending')){
+        task.classList.replace('pending', 'completed')
+    }else{
+        task.classList.replace('completed', 'pending')
+    }
+
 
     data.find((item) => {
         return item.id === +task.dataset.id
@@ -331,24 +365,48 @@ setInterval(()=>{
 //-----------------------------------------------------
 
 function show (show){
-    let count = 0
+
+    const display = []
+    const notDisplayed = []
+    
     if(show === 'pending' || show === 'expired' || show === 'completed'){
         list.querySelectorAll('.task').forEach(element => {
             if(element.classList.contains(show)){
-                element.style.display = 'flex'
-                count++
-                document.querySelector('.notThing')?.remove()
-            }else{
-                element.style.display = 'none'
-                if(count === 0 && document.querySelector('.notThing') === null) {
-                    list.insertAdjacentHTML('afterbegin', `<p class="notThing">You don't have any task here</p>`)
+                if(!element.classList.contains('show')){
+                    display.push(element)
                 }
-                
+            }else{
+                if(element.classList.contains('show')){
+                    notDisplayed.push(element)
+                }
             }
         })
-    }else if(show === 'all'){
-        list.querySelectorAll('.task').forEach(element => {element.style.display = 'flex'})
+    }else if(show = 'all') {
+        showItem()
     }
+
+    let countDisplay = 0
+    let countNotDisplayed = 0
+
+    
+    const notDisplayedInterval = setInterval(() => {
+        if(countNotDisplayed === notDisplayed.length) {
+            clearInterval(notDisplayedInterval)
+        } else {
+            notDisplayed[countNotDisplayed++].classList.remove('show')
+        }
+    }, 125);
+    
+    setTimeout(() => {
+        const displayInterval = setInterval(() => {
+            if(countDisplay === display.length) {
+                clearInterval(displayInterval)
+            } else {
+                display[countDisplay++].classList.add('show')
+            }
+        }, 125);
+    
+    }, notDisplayed.length * 125);
 
     return
 }
@@ -399,20 +457,47 @@ document.getElementById('z-a').addEventListener('click', ()=>{
 
 
 document.getElementById("search").oninput = function(){
+    const display = []
+    const notDisplayed = []
+    
     const keyWord = this.value.toLowerCase()
     for (const element of [...document.querySelectorAll('.list .task')]) {
-        const info = element.querySelector('.task-content').innerText.toLowerCase()
+        const info = element.querySelector('.task-content').textContent.toLowerCase()
         if(info.includes(keyWord)){
-            element.style.display = 'flex'
+            if(!element.classList.contains('show')){
+                display.push(element)
+            }
         }else{
-            element.style.display = 'none'
+            if(element.classList.contains('show')){
+                notDisplayed.push(element)
+            }
         }
         
     }
+
+    let countDisplay = 0
+    let countNotDisplayed = 0
+
+    const notDisplayedInterval = setInterval(() => {
+        if(countNotDisplayed === notDisplayed.length) {
+            clearInterval(notDisplayedInterval)
+        } else {
+            notDisplayed[countNotDisplayed++].classList.remove('show')
+        }
+    }, 125);
+    
+    setTimeout(() => {
+        const displayInterval = setInterval(() => {
+            if(countDisplay === display.length) {
+                clearInterval(displayInterval)
+            } else {
+                display[countDisplay++].classList.add('show')
+            }
+        }, 125);    
+    }, notDisplayed.length * 125);
+
 }
-window.onload = function(){
-    list.style.height = document.documentElement.clientHeight - document.querySelector('.controls').offsetHeight - 28 + 'px'
-}
+
 
 
 
