@@ -364,6 +364,7 @@ body {
     font-size: 18px;
     line-height: 1.4;
     cursor: pointer;
+    word-break: break-all;
 }
 
 .task .dot {

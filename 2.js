@@ -53,7 +53,7 @@
     buttonAdd.addEventListener('click', function(){
         const name = inputTask.value
         const dateTime = inputDueDate.value
-        if(name === '' || dateTime === '') return
+        if(name.trim() === '' || dateTime === '') return
         
         let idMax = localStorage.getItem('idMax')
         
