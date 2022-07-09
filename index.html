@@ -10,73 +10,76 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
+
     <div class="wrapper">
 
         <div class="controls">
             
             <h1 class="heading">To Do List</h1>
 
-        <div class="add">
-            <div class="add__task">
-                <input type="text" id="input-task" >
-                <label for="input-task">Task name</label>
-            </div>
-            <div class="add__deadline">
-                <span>Due date:</span>
-                <p class="nowDate">--- dd/mm/yyyy --:--</p>
-                <div class="deadline">
-                    <input id="deadline" type="datetime-local">
-                    <i class="las la-calendar-check"></i>
-                </div>
-            </div>
-            <button class="btn" id="btn-add">Add task</button>
-            <button class="btn" id="btn-save">Save task</button>
-        </div>
-
-        <div class="menu">
-
-            <ul class="tabList">
-                <li class="tabName active" id="tabShow">Show</li>
-                <li class="tabName" id="tabSort">Sort</li>
-                <li class="tabName" id="tabSearch">Search</li>
-                <div class="line"></div>
-            </ul>
-
-            <div class="tabContent">
-
-                <ul class="active tabPaneShow" data-pane="tabShow">
-                    <li id="all" class="active">All</li>
-                    <li id="pending">Pending</li>
-                    <li id="completed">Completed</li>
-                    <li id="expired">Expired</li>
-                </ul>
-
-                <ul class="tabPaneSort" data-pane="tabSort">
-                    <li id="time">Time</li>
-                    <li id="a-z">A -> Z</li>
-                    <li id="z-a">Z -> A</li>
-                </ul>
+            <div class="add">
                 
-                <ul class="tabPaneSearch" data-pane="tabSearch">
-                    <input type="text" id="search" placeholder="What task are you looking for?" autocomplete="off">
-                    <i class="las la-search"></i>
-                </ul>
+                <div class="add__task">
+                    <input type="text" id="input-task" >
+                    <label for="input-task">Task name</label>
+                </div>
+
+                <div class="add__deadline">
+                    <span>Due date:</span>
+                    <p class="nowDate">--- dd/mm/yyyy --:--</p>
+                    <div class="deadline">
+                        <input id="deadline" type="datetime-local">
+                        <i class="las la-calendar-check"></i>
+                    </div>                    
+                </div>
+
+                <button class="btn" id="btn-add">Add task</button>
+                <button class="btn" id="btn-save">Save task</button>
 
             </div>
 
-        </div>
+            <div class="menu">
+
+                <ul class="tabList">
+                    <li class="tabName active" id="tabShow">Show</li>
+                    <li class="tabName" id="tabSort">Sort</li>
+                    <li class="tabName" id="tabSearch">Search</li>
+                    <div class="line"></div>
+                </ul>
+
+                <div class="tabContent">
+
+                    <ul class="active tabPaneShow" data-pane="tabShow">
+                        <li id="all" class="active">All</li>
+                        <li id="pending">Pending</li>
+                        <li id="completed">Completed</li>
+                        <li id="expired">Expired</li>
+                    </ul>
+
+                    <ul class="tabPaneSort" data-pane="tabSort">
+                        <li id="time">Time</li>
+                        <li id="a-z">A -> Z</li>
+                        <li id="z-a">Z -> A</li>
+                    </ul>
+                    
+                    <ul class="tabPaneSearch" data-pane="tabSearch">
+                        <input type="text" id="search" placeholder="What task are you looking for?" autocomplete="off">
+                        <i class="las la-search"></i>
+                    </ul>
+
+                </div>
+
+            </div>
+            
         </div>
 
-        <ul class="list">
-            
-        </ul>
-            
-            
-
-            
+        <ul id="list"></ul>
 
     </div>
 
-    <script src="./app.js"></script>
+    <script src="./0.js"></script>
+    <script src="./1.js"></script>
+    <script src="./2.js"></script>
+    <!-- <script src="./app.js"></script> -->
 </body>
 </html>

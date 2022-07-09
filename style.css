@@ -10,7 +10,7 @@
 
 body {
     width: 100%;
-    height: 100%;
+    height: 100vh;
     background: linear-gradient(135deg, rgb(74, 177, 255), rgb(45, 92, 254));
     font-family: Poppins, sans-serif;
     -webkit-tap-highlight-color: transparent;
@@ -34,9 +34,7 @@ body {
     padding-bottom: 28px;
 }
 
-.controls{
-    padding-top: 28px;
-}
+.controls{padding-top: 28px;}
 
 .add {
     padding: 25px;
@@ -386,10 +384,10 @@ body {
     padding: 4px 0px;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 6px;
     transition: all 0.25s ease 0s;
-    z-index: 100;
-    right: -8px;
-    top: 0px;
-    transform-origin: 80% 20%;
+    z-index: 146;
+    right: 0px;
+    top: -20px;
+    transform-origin: 95% 40%;
     transform: scale(0);
     opacity: 0;
 }
@@ -446,25 +444,25 @@ ul.tabPaneSort {
 }
 
 /* width */
-.list::-webkit-scrollbar {
+#list::-webkit-scrollbar {
     width: 2px;
     
 }
 
 /* Track */
-.list::-webkit-scrollbar-track {
+#list::-webkit-scrollbar-track {
     background: transparent;
     
 }
 
 /* Handle */
-.list::-webkit-scrollbar-thumb {
+#list::-webkit-scrollbar-thumb {
     background: #888;
     border-radius: 10px;
 }
 
 /* Handle on hover */
-.list::-webkit-scrollbar-thumb:hover {
+#list::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
 
@@ -501,21 +499,19 @@ ul.tabPaneSort {
     visibility: visible;
     opacity: 1;
     transform: scale(1);
-    
     padding: 6px 0px 8px;
     border-bottom: 1px solid rgb(204, 204, 204);
     margin-bottom: 20px;
-    
     width: 100%;
     display: flex;
     align-items: center;
     position: relative;
     user-select: none;
+    z-index: 1;
 }
 
-.list {
+#list {
     list-style: none;
-    padding: 28px 25px;
+    padding: 28px 25px 0;
     overflow-y: auto;
-    padding-bottom: 0;
 }
