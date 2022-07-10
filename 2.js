@@ -19,6 +19,7 @@
         if(new Date().getTime() > new Date(this.value).getTime()){
             pNowDate.innerHTML = '--- dd/mm/yyyy --:--'
             this.value = ''
+            alert('Please select a Future Due Date')
         }else{
             pNowDate.innerHTML = convertDate(new Date(this.value))
         }
@@ -53,7 +54,10 @@
     buttonAdd.addEventListener('click', function(){
         const name = inputTask.value
         const dateTime = inputDueDate.value
-        if(name.trim() === '' || dateTime === '') return
+        if(name.trim() === '' || dateTime === ''){
+            alert(`Please select a Future Due Date and don't leave it blank task name`)
+            return
+        } 
         
         let idMax = localStorage.getItem('idMax')
         
