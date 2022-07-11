@@ -16,6 +16,7 @@
 
 //2. xử lý inputDueDate
     inputDueDate.addEventListener('input', function(){
+        console.log(this.value)
         if(new Date().getTime() > new Date(this.value).getTime()){
             pNowDate.innerHTML = '--- dd/mm/yyyy --:--'
             this.value = ''
@@ -28,16 +29,40 @@
 
 //3. xử lý check, thay đổi class và lưu vào localStorage
     function nameClick(_this){
+
         
         let task = _this.parentElement
         while(!task.matches('.task')){
             task = task.parentElement
         }
+
+        const tabShowActive =  document.querySelector('.tabPaneShow.active li.active')?.id
+
+        
         
         if(task.classList.contains('pending')){
             task.classList.replace('pending', 'completed')
         }else{
             task.classList.replace('completed', 'pending')
+        }
+
+        
+        let countTask = 0
+        if(tabShowActive === 'pending' || tabShowActive === 'completed'){
+            
+            if(!task.classList.contains(tabShowActive)){
+                task.classList.remove('show')
+
+                list.querySelectorAll('.task').forEach(task => {
+                    if(task.classList.contains(tabShowActive)) countTask++
+                })
+            }
+
+            if(countTask === 0 && document.querySelector('a') === null){
+                setTimeout(()=>{
+                    list.insertAdjacentHTML('afterbegin', `<p class="notThing">You don't have any task here</p>`)
+                },250)
+            }
         }
 
 
